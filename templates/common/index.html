@@ -1,11 +1,160 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="p-5 mb-4 bg-white rounded-3 border">
-    <div class="container-fluid py-5 text-center">
-        <h1 class="display-5 fw-bold">Welcome to TaskForce</h1>
-        <p class="fs-4">The ultimate system for managing your projects and teams efficiently.</p>
-        <button class="btn btn-primary btn-lg" type="button">Get Started</button>
+
+<div class="position-relative overflow-hidden m-md-2 text-white rounded-5 shadow-custom"
+     style="
+        background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+        url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80');
+        background-size: cover;
+        background-position: center;
+        min-height: 600px; ">
+
+    <div class="position-absolute top-50 start-50 translate-middle text-center px-3"
+         style="width: 100%; max-width: 900px;">
+
+        <h1 class="hero-title">Master Your Workflow</h1>
+
+        <p class="lead fw-normal mt-4 mb-5 opacity-90">
+            The ultimate professional suite for tracking projects and empowering teams.
+        </p>
+
+        <a class="btn btn-lg px-5 py-3 shadow-lg fw-bold border-0 transition-all"
+           href="{% url 'project-create' %}"
+           style="background-color: #6366f1; color: white; border-radius: 15px;">
+            Start New Project
+        </a>
+
     </div>
 </div>
+
+
+<div class="row text-center my-5 px-3">
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-custom py-4 border-start border-primary border-5">
+            <div class="card-body">
+                <i class="bi bi-kanban fs-1 text-primary mb-2"></i>
+                <h2 class="fw-bold">{{ total_projects }}</h2>
+                <p class="text-muted text-uppercase small fw-bold">Active Projects</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-custom py-4 border-start border-success border-5">
+            <div class="card-body">
+                <i class="bi bi-check2-circle fs-1 text-success mb-2"></i>
+                <h2 class="fw-bold">{{ total_tasks }}</h2>
+                <p class="text-muted text-uppercase small fw-bold">Total Tasks</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-custom py-4 border-start border-info border-5">
+            <div class="card-body">
+                <i class="bi bi-people fs-1 text-info mb-2"></i>
+                <h2 class="fw-bold">{{ total_workers }}</h2>
+                <p class="text-muted text-uppercase small fw-bold">Team Members</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row px-3">
+    <div class="col-lg-10 mx-auto">
+
+        <div class="card shadow-custom border-0 mb-5">
+
+            <div class="card-header bg-white py-4 border-0">
+                <h3 class="fw-bold mb-0">
+                    <i class="bi bi-clock-history me-2"></i> Recent Tasks
+                </h3>
+            </div>
+
+            <div class="card-body p-0" style="max-height: 450px; overflow-y: auto;">
+
+                <ul class="list-group list-group-flush">
+
+                    {% for task in recent_tasks %}
+                    <li class="list-group-item activity-row d-flex justify-content-between align-items-center px-4 py-4">
+
+                        <div class="d-flex align-items-center gap-3 flex-wrap">
+
+                            <span class="activity-title">
+                                {{ task.title }}
+                            </span>
+
+                            <span class="text-muted">|</span>
+
+                            <span class="activity-project">
+                                {{ task.project.name }}
+                            </span>
+
+                        </div>
+
+                        {% if task.status == 'done' %}
+                            <span class="badge activity-badge bg-success-subtle text-success border border-success">
+                                Done
+                            </span>
+                        {% elif task.status == 'in_progress' %}
+                            <span class="badge activity-badge bg-warning-subtle text-dark border border-warning">
+                                In Progress
+                            </span>
+                        {% else %}
+                            <span class="badge activity-badge bg-secondary-subtle text-secondary border border-secondary">
+                                To Do
+                            </span>
+                        {% endif %}
+
+                    </li>
+                    {% empty %}
+                    <li class="list-group-item text-center py-4 text-muted">
+                        No recent activity detected.
+                    </li>
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+.transition-all { transition: all 0.3s ease; }
+.transition-all:hover {
+    background-color: #4f46e5;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(99, 102, 241, 0.4);
+}
+
+.activity-row {
+    transition: background 0.2s ease;
+}
+
+.activity-row:hover {
+    background-color: #f8f9fa;
+}
+
+.activity-title {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: #212529;
+}
+
+.activity-project {
+    font-size: 18px;
+    color: #6c757d;
+}
+
+.activity-badge {
+    font-size: 0.95rem;
+    padding: 8px 16px;
+    border-radius: 999px;
+}
+</style>
+
 {% endblock %}

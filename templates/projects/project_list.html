@@ -1,29 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Active Projects</h2>
-    <a href="{% url 'project-create' %}" class="btn btn-success">+ Create New Project</a>
-</div>
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-5 pb-3">
+        <h1 class="fw-bold display-8 mb-0" style="letter-spacing: -1px;">Active Projects</h1>
+        <a href="{% url 'project-create' %}" class="btn btn-primary shadow px-4 py-3 fw-bold"
+           style="border-radius: 12px; font-size: 1.1rem;">
+            <i class=""></i> + Create New Project
+        </a>
+    </div>
 
-<div class="row">
-    {% for project in projects %}
-    <div class="col-md-4 mb-3">
-        <div class="card h-100 shadow-sm">
-            <div class="card-body">
-                <h5 class="card-title">{{ project.name }}</h5>
-                <p class="card-text text-muted">{{ project.description|truncatechars:100 }}</p>
-                <p class="small"><strong>Deadline:</strong> {{ project.deadline }}</p>
-            </div>
-            <div class="card-footer bg-transparent border-top-0">
-                <a href="#" class="btn btn-outline-primary btn-sm">View Details</a>
+    <div class="row g-5">
+        {% for project in projects %}
+        <div class="col-md-4">
+            <div class="card h-100 shadow-custom border-0 p-2" style="border-radius: 25px;">
+                <div class="card-body p-4 d-flex flex-column">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 fw-bold"
+                              style="font-size: 0.85rem;">
+                            ACTIVE
+                        </span>
+                        <small class="text-muted fs-6">
+                            <i class="bi bi-calendar3 me-1"></i> {{ project.deadline }}
+                        </small>
+                    </div>
+
+                    <h3 class="fw-bold mb-3 text-dark" style="font-size: 1.75rem; line-height: 1.2;">
+                        {{ project.name }}
+                    </h3>
+
+                    <p class="text-secondary mb-5 flex-grow-1" style="font-size: 1.1rem; line-height: 1.6;">
+                        {{ project.description|truncatechars:120 }}
+                    </p>
+
+                    <div class="d-grid mt-auto">
+                        <a href="{% url 'project-details' project.pk %}"
+                           class="btn btn-outline-primary fw-bold rounded-4 py-3"
+                           style="font-size: 1.05rem; border-width: 2px;">
+                            View Details
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
+        {% empty %}
+        <div class="col-12 text-center py-5 mt-5">
+            <div class="display-6 text-muted opacity-50">No active projects at the moment.</div>
+        </div>
+        {% endfor %}
     </div>
-    {% empty %}
-    <div class="col-12">
-        <p class="alert alert-info">No projects found. Go to Admin to add some!</p>
-    </div>
-    {% endfor %}
 </div>
 {% endblock %}

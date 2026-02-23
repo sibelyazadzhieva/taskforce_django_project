@@ -7,4 +7,4 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(Task)
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ('title', 'project', 'is_completed')
+    list_display = ('title', 'project', 'status')

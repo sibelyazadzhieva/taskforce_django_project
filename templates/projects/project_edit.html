@@ -3,8 +3,8 @@
 {% block content %}
 <div class="container py-4">
     <div class="mb-5">
-        <a href="{% url 'project-list' %}" class="text-decoration-none text-primary fw-bold fs-5">
-            <i class="bi bi-arrow-left me-2"></i> Back to All Projects
+        <a href="{% url 'project-details' project.pk %}" class="text-decoration-none text-primary fw-bold fs-5">
+            <i class="bi bi-arrow-left me-2"></i> Back to Project Details
         </a>
     </div>
 
@@ -13,8 +13,8 @@
             <div class="card border-0 shadow-custom" style="border-radius: 25px;">
                 <div class="card-body p-5">
                     <div class="text-center mb-5">
-                        <h2 class="fw-bold display-6 mb-2">Create New Project</h2>
-                        <p class="text-muted fs-5">Start something new! Fill in the details below.</p>
+                        <h2 class="fw-bold display-6 mb-2">Edit Project</h2>
+                        <p class="text-muted fs-5">Update the information for <strong>{{ project.name }}</strong></p>
                     </div>
 
                     <form method="post" novalidate>
@@ -22,8 +22,8 @@
 
                         {% for field in form %}
                             <div class="mb-4">
-                                <label class="form-label fw-bold text-dark mb-2"
-                                       style="font-size: 1.2rem; letter-spacing: 0.5px; text-transform: uppercase;">
+                                <label class="form-label fw-bold text-dark mb-2" style="font-size: 1.2rem;
+                                letter-spacing: 0.5px;  text-transform: uppercase;">
                                     {{ field.label }}
                                 </label>
 
@@ -46,11 +46,11 @@
                         <div class="d-grid gap-3 mt-5">
                             <button type="submit" class="btn btn-primary fw-bold py-3 fs-5"
                                     style="border-radius: 12px; shadow: 0 4px 15px rgba(78, 115, 223, 0.2);">
-                                Create Project
+                                Save Changes
                             </button>
-                            <a href="{% url 'project-list' %}" class="btn btn-outline-secondary py-2 fw-bold"
+                            <a href="{% url 'project-details' project.pk %}" class="btn btn-outline-secondary py-2 fw-bold"
                                style="border-radius: 12px;">
-                                Cancel
+                                Cancel Changes
                             </a>
                         </div>
                     </form>
@@ -68,7 +68,7 @@
         display: block;
         width: 100%;
         padding: 0.8rem 1rem;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
         font-weight: 400;
         line-height: 1.5;
         color: #495057;
@@ -89,11 +89,14 @@
 
     textarea {
         min-height: 120px;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
+    }
+    textarea.form-control {
+        font-size: 1.3rem;
     }
 
-    input[type="date"] {
-        font-size: 1.4rem;
+    element.style {
+        font-size: 1.2rem;
     }
 
     select[multiple] {
@@ -101,9 +104,6 @@
         min-height: 100px;
         font-size: 1.2rem;
     }
+
 </style>
 {% endblock %}
-
-
-
-

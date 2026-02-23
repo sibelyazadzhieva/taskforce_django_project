@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center align-items-center" style="min-height: 50vh;">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm p-5 text-center" style="border-radius: 20px;">
+                <div class="card-body">
+
+                    <h2 class="fw-bold text-dark mb-4" style="font-size: 2.2rem;">Remove Team Member</h2>
+
+                    <p class="text-secondary mb-5 fs-4" style="line-height: 1.5;">
+                        Are you sure you want to remove <br>
+                        <strong class="text-dark">{{ worker.first_name }} {{ worker.last_name }}</strong> from the team? <br>
+                        <span class="text-muted fs-6">This action cannot be undone.</span>
+                    </p>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-grid gap-3">
+                            <button type="submit" class="btn btn-danger py-3 fw-bold fs-5" style="border-radius: 12px;">
+                                Yes, Remove Member
+                            </button>
+                            <a href="{% url 'worker-list' %}" class="btn btn-light py-3 fw-bold fs-5 text-dark border"
+                               style="border-radius: 12px;">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
