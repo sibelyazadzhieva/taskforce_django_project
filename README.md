@@ -13,7 +13,7 @@ TaskForce is a modern, responsive, and robust Web Application built with the Dja
 
 * **Backend:** Python, Django
 * **Frontend:** HTML5, CSS3, Bootstrap 5, Bootstrap Icons
-* **Database:** SQLite (Default)
+* **Database:** PostgreSQL
 
 ## Getting Started
 
