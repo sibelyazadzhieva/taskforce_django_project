@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg sticky-top mb-4">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center text-primary" href="{% url 'index' %}">
+            <i class="bi bi-rocket-takeoff-fill me-2"></i>
+            <span class="text-dark">TaskForce</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <div class="navbar-nav">
+                <a class="nav-link {% if request.resolver_match.url_name == 'project-list' %}active{% endif %}"
+                   href="{% url 'project-list' %}">
+                    Projects
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'task-list' %}active{% endif %}"
+                   href="{% url 'task-list' %}">
+                    Tasks
+                </a>
+                <a class="nav-link {% if request.resolver_match.url_name == 'worker-list' %}active{% endif %}"
+                   href="{% url 'worker-list' %}">
+                    Teams
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

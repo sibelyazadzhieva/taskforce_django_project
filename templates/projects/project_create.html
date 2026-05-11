@@ -1,29 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container py-4">
-    <div class="mb-5">
-        <a href="{% url 'project-list' %}" class="text-decoration-none text-primary fw-bold fs-5">
-            <i class="bi bi-arrow-left me-2"></i> Back to All Projects
-        </a>
-    </div>
-
+<div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-lg-7">
-            <div class="card border-0 shadow-custom" style="border-radius: 25px;">
-                <div class="card-body p-5">
-                    <div class="text-center mb-5">
-                        <h2 class="fw-bold display-6 mb-2">Create New Project</h2>
-                        <p class="text-muted fs-5">Start something new! Fill in the details below.</p>
+        <div class="col-md-10 col-lg-8 col-xl-7">
+
+            <div class="mb-4">
+                <a href="javascript:history.back()" class="text-decoration-none text-primary fw-bold">
+                    <i class="bi bi-arrow-left me-1"></i> Back
+                </a>
+            </div>
+
+            <div class="card border-0 shadow-sm" style="border-radius: 15px;">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold fs-3 mb-2">Create New Project</h2>
+                        <p class="text-muted" style="font-size: 0.95rem;">Start something new! Fill in the details below.</p>
                     </div>
 
                     <form method="post" novalidate>
                         {% csrf_token %}
 
                         {% for field in form %}
-                            <div class="mb-4">
-                                <label class="form-label fw-bold text-dark mb-2"
-                                       style="font-size: 1.2rem; letter-spacing: 0.5px; text-transform: uppercase;">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold text-dark mb-1"
+                                       style="font-size: 0.8rem; letter-spacing: 0.5px; text-transform: uppercase;">
                                     {{ field.label }}
                                 </label>
 
@@ -32,30 +33,31 @@
                                 </div>
 
                                 {% if field.help_text %}
-                                    <div class="form-text text-muted mt-2 fs-4">{{ field.help_text }}</div>
+                                    <div class="form-text text-muted mt-1" style="font-size: 0.8rem;">{{ field.help_text }}</div>
                                 {% endif %}
 
                                 {% for error in field.errors %}
-                                    <div class="text-danger fw-bold mt-2 small">
+                                    <div class="text-danger fw-bold mt-1 small">
                                         <i class="bi bi-exclamation-circle me-1"></i> {{ error }}
                                     </div>
                                 {% endfor %}
                             </div>
                         {% endfor %}
 
-                        <div class="d-grid gap-3 mt-5">
-                            <button type="submit" class="btn btn-primary fw-bold py-3 fs-5"
-                                    style="border-radius: 12px; shadow: 0 4px 15px rgba(78, 115, 223, 0.2);">
+                        <div class="d-grid gap-2 mt-4 pt-2">
+                            <button type="submit" class="btn btn-primary fw-bold py-2"
+                                    style="border-radius: 8px;">
                                 Create Project
                             </button>
-                            <a href="{% url 'project-list' %}" class="btn btn-outline-secondary py-2 fw-bold"
-                               style="border-radius: 12px;">
+                            <a href="javascript:history.back()" class="btn btn-outline-secondary py-2 fw-bold"
+                               style="border-radius: 8px;">
                                 Cancel
                             </a>
                         </div>
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -67,43 +69,33 @@
     select {
         display: block;
         width: 100%;
-        padding: 0.8rem 1rem;
-        font-size: 1.4rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 0.95rem;
         font-weight: 400;
         line-height: 1.5;
-        color: #495057;
+        color: #212529;
         background-color: #f8f9fa;
         background-clip: padding-box;
-        border: 2px solid #e9ecef;
-        border-radius: 12px;
+        border: 1px solid #ced4da;
+        border-radius: 8px;
         transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
 
     input:focus, textarea:focus, select:focus {
-        color: #495057;
+        color: #212529;
         background-color: #fff;
         border-color: #4e73df;
         outline: 0;
-        box-shadow: 0 0 0 0.25rem rgba(78, 115, 223, 0.1);
+        box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
     }
 
     textarea {
-        min-height: 120px;
-        font-size: 1.4rem;
-    }
-
-    input[type="date"] {
-        font-size: 1.4rem;
+        min-height: 100px;
     }
 
     select[multiple] {
         height: auto;
         min-height: 100px;
-        font-size: 1.2rem;
     }
 </style>
 {% endblock %}
-
-
-
-

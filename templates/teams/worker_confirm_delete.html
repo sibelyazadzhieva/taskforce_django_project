@@ -1,28 +1,40 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
+    body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+    main {
+        flex-grow: 1;
+    }
+</style>
+
 <div class="container py-5">
     <div class="row justify-content-center align-items-center" style="min-height: 50vh;">
-        <div class="col-lg-6">
-            <div class="card border-0 shadow-sm p-5 text-center" style="border-radius: 20px;">
+        <div class="col-md-8 col-lg-6 col-xl-5">
+            <div class="card border-0 shadow-sm p-4 text-center" style="border-radius: 15px;">
                 <div class="card-body">
 
-                    <h2 class="fw-bold text-dark mb-4" style="font-size: 2.2rem;">Remove Team Member</h2>
+                    <h2 class="fw-bold text-dark mb-3 fs-4">Remove Team Member</h2>
 
-                    <p class="text-secondary mb-5 fs-4" style="line-height: 1.5;">
+                    <p class="text-secondary mb-4" style="font-size: 0.95rem; line-height: 1.5;">
                         Are you sure you want to remove <br>
-                        <strong class="text-dark">{{ worker.first_name }} {{ worker.last_name }}</strong> from the team? <br>
-                        <span class="text-muted fs-6">This action cannot be undone.</span>
+                        <strong class="text-dark" style="font-size: 1.05rem;">{{ worker.first_name }} {{ worker.last_name }}</strong> from the team? <br>
+                        <span class="text-muted mt-2 d-block" style="font-size: 0.85rem;">This action cannot be undone.</span>
                     </p>
 
                     <form method="post">
                         {% csrf_token %}
-                        <div class="d-grid gap-3">
-                            <button type="submit" class="btn btn-danger py-3 fw-bold fs-5" style="border-radius: 12px;">
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-danger py-2 fw-bold" style="border-radius: 8px;">
                                 Yes, Remove Member
                             </button>
-                            <a href="{% url 'worker-list' %}" class="btn btn-light py-3 fw-bold fs-5 text-dark border"
-                               style="border-radius: 12px;">
+                            <a href="{% url 'worker-list' %}"
+                               class="btn btn-light py-2 fw-bold text-dark border"
+                               style="border-radius: 8px; background-color: #f8f9fa;">
                                 Cancel
                             </a>
                         </div>

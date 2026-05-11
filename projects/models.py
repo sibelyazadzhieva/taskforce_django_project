@@ -1,7 +1,7 @@
 from django.db import models
 from teams.models import Worker
 from django.core.exceptions import ValidationError
-
+from datetime import date
 
 def validate_min_length(value):
     if len(value) < 10:
@@ -13,6 +13,10 @@ class Project(models.Model):
     deadline = models.DateField()
 
     team_members = models.ManyToManyField(Worker, related_name='projects')
+
+    @property
+    def is_overdue(self):
+        return self.deadline < date.today()
 
     def __str__(self):
         return self.name
